@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { portfolioVideos } from "@/lib/data";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "../ui/button";
 
 export function Portfolio() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -48,7 +47,7 @@ export function Portfolio() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="relative z-10 flex h-full items-center justify-center text-primary-foreground">
+      <div className="relative z-10 flex h-full flex-col justify-end pb-16 text-primary-foreground">
         <div className="text-center px-4">
           <motion.h2
             key={activeVideo.id + "-title"}
@@ -66,7 +65,7 @@ export function Portfolio() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-4 max-w-3xl mx-auto text-lg md:text-xl text-foreground/80"
+            className="mt-4 max-w-3xl mx-auto text-foreground/80 md:text-lg"
           >
             {activeVideo.description}
           </motion.p>

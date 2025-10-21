@@ -48,7 +48,7 @@ export function Header() {
         scrolled ? "bg-background/80 backdrop-blur-sm border-b" : "bg-transparent"
       )}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+      <div className="container mx-auto flex h-14 items-center justify-between px-4 md:px-6">
         <Link href="#" className="flex items-center gap-2 font-semibold" prefetch={false}>
           <Film className="h-6 w-6 text-primary" />
           <span className="text-lg font-bold">Luhashi Films</span>
