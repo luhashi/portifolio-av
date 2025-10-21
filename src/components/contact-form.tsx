@@ -72,7 +72,7 @@ export function ContactForm() {
   }, [state, toast, form]);
 
   return (
-    <Card className="bg-card">
+    <Card className="bg-background border-border/50">
       <CardContent className="p-6">
         <Form {...form}>
           <form ref={formRef} action={formAction} className="space-y-6">
@@ -115,7 +115,7 @@ export function ContactForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button type="submit" disabled={isSubmitting} className="w-full">
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
