@@ -2,20 +2,11 @@
 import { useState } from "react";
 import { portfolioVideos } from "@/lib/data";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export function Portfolio() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeVideo = portfolioVideos[activeIndex];
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % portfolioVideos.length);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex(
-      (prev) => (prev - 1 + portfolioVideos.length) % portfolioVideos.length
-    );
-  };
 
   const videoVariants = {
     initial: { opacity: 0, scale: 1.05 },
@@ -47,44 +38,58 @@ export function Portfolio() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="relative z-10 flex h-full flex-col justify-end pb-16 text-primary-foreground">
-        <div className="text-center px-4">
-          <motion.h2
-            key={activeVideo.id + "-title"}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline"
-          >
-            {activeVideo.title}
-          </motion.h2>
-          <motion.p
-            key={activeVideo.id + "-desc"}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-4 max-w-3xl mx-auto text-foreground/80 md:text-lg"
-          >
-            {activeVideo.description}
-          </motion.p>
+      <div className="relative z-10 flex h-full flex-col justify-end text-primary-foreground">
+        <div className="bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pb-24 md:pb-32">
+          <div className="container mx-auto px-4 text-center">
+            <motion.h2
+              key={activeVideo.id + "-title"}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline"
+            >
+              {activeVideo.title}
+            </motion.h2>
+            <motion.p
+              key={activeVideo.id + "-desc"}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="mt-2 max-w-3xl mx-auto text-foreground/80 md:text-base"
+            >
+              {activeVideo.description}
+            </motion.p>
+          </div>
         </div>
       </div>
-
-      <div className="absolute z-20 left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2">
-        {portfolioVideos.map((video, index) => (
-          <button
-            key={video.id}
-            onClick={() => setActiveIndex(index)}
-            className="w-3 h-3 rounded-full transition-colors"
-            style={{
-              backgroundColor:
-                index === activeIndex ? "hsl(var(--primary))" : "hsla(var(--foreground), 0.5)",
-            }}
-            aria-label={`Ir para o vídeo ${video.title}`}
-          />
-        ))}
+      
+      <div className="absolute bottom-0 left-0 right-0 z-20 p-4 bg-black/30 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <div className="flex justify-center gap-2 md:gap-4 overflow-x-auto">
+            {portfolioVideos.map((video, index) => (
+              <motion.button
+                key={video.id}
+                onClick={() => setActiveIndex(index)}
+                className={`relative shrink-0 w-24 h-14 md:w-32 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                  index === activeIndex ? "border-primary scale-105" : "border-transparent opacity-60 hover:opacity-100"
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Image
+                  src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
+                  alt={video.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+              </motion.button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
