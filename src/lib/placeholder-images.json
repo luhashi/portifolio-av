@@ -1,3 +1,16 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "A dynamic shot of an FPV drone flying through a cinematic landscape, representing aerial cinematography.",
+      "imageUrl": "https://images.unsplash.com/photo-1669307502695-d1487616609e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkcm9uZSUyMGxhbmRzY2FwZXxlbnwwfHx8fDE3NjEwMzgzMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "drone landscape"
+    },
+    {
+      "id": "about-photo",
+      "description": "A professional portrait of Lucas Hashimoto on a film set.",
+      "imageUrl": "https://images.unsplash.com/photo-1624351087886-dba087f913d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmaWxtbWFrZXIlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEwODY5NzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "filmmaker portrait"
+    }
+  ]
 }
