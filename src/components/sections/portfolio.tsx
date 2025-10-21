@@ -34,7 +34,6 @@ export function Portfolio() {
             allowFullScreen
             className="w-full h-full object-cover"
           ></iframe>
-          <div className="absolute inset-0 bg-black/60" />
         </motion.div>
       </AnimatePresence>
 
@@ -81,9 +80,8 @@ export function Portfolio() {
                 <Image
                   src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`}
                   alt={video.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300"
+                  fill
+                  className="transition-transform duration-300 object-cover"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
               </motion.button>
