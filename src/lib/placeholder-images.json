@@ -9,7 +9,7 @@
     {
       "id": "about-photo",
       "description": "A professional portrait of Lucas Hashimoto on a film set, operating a camera.",
-      "imageUrl": "https://images.unsplash.com/photo-1578912375833-25f03d09292a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmaWxtbWFrZXIlMjB3aXRoJTIwY2FtZXJhfGVufDB8fHx8MTc2MTExMDYxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://storage.googleapis.com/gweb-aip-dev.appspot.com/llm-assets/prompts/images/847721539-164580321.png",
       "imageHint": "filmmaker camera"
     }
   ]
