@@ -63,7 +63,7 @@ export function Hero() {
           className="mt-8"
         >
           <Button asChild size="lg" variant="outline" className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            <Link href="#portfolio">Ver Portfólio</Link>
+            <Link href="#about">Conheça meu trabalho</Link>
           </Button>
         </motion.div>
       </div>

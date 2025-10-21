@@ -1,46 +1,92 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+"use client";
+import { useState } from "react";
 import { portfolioVideos } from "@/lib/data";
-import { AnimatedSection } from "../animated-section";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "../ui/button";
 
 export function Portfolio() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeVideo = portfolioVideos[activeIndex];
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % portfolioVideos.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex(
+      (prev) => (prev - 1 + portfolioVideos.length) % portfolioVideos.length
+    );
+  };
+
+  const videoVariants = {
+    initial: { opacity: 0, scale: 1.05 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 1.05 },
+  };
+
   return (
-    <AnimatedSection id="portfolio" className="py-12 md:py-16 lg:py-20">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">Portfólio</h2>
-          <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-            Uma seleção de trabalhos que demonstram minha paixão por contar histórias através de imagens.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {portfolioVideos.map((video) => (
-            <Card key={video.id} className="overflow-hidden bg-secondary border-border/50 group">
-              <div className="aspect-video overflow-hidden">
-                <iframe
-                  src={`https://www.youtube.com/embed/${video.youtubeId}`}
-                  title={video.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full group-hover:scale-105 transition-transform duration-500"
-                ></iframe>
-              </div>
-              <CardHeader>
-                <CardTitle className="font-headline text-2xl">{video.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>{video.description}</CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+    <section id="portfolio" className="relative h-screen w-full overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeVideo.id}
+          className="absolute inset-0 z-0"
+          variants={videoVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
+          <iframe
+            src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=${activeVideo.youtubeId}`}
+            title={activeVideo.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full object-cover"
+          ></iframe>
+          <div className="absolute inset-0 bg-black/60" />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="relative z-10 flex h-full items-center justify-center text-primary-foreground">
+        <div className="text-center px-4">
+          <motion.h2
+            key={activeVideo.id + "-title"}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline"
+          >
+            {activeVideo.title}
+          </motion.h2>
+          <motion.p
+            key={activeVideo.id + "-desc"}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-4 max-w-3xl mx-auto text-lg md:text-xl text-foreground/80"
+          >
+            {activeVideo.description}
+          </motion.p>
         </div>
       </div>
-    </AnimatedSection>
+
+      <div className="absolute z-20 left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+        {portfolioVideos.map((video, index) => (
+          <button
+            key={video.id}
+            onClick={() => setActiveIndex(index)}
+            className="w-3 h-3 rounded-full transition-colors"
+            style={{
+              backgroundColor:
+                index === activeIndex ? "hsl(var(--primary))" : "hsla(var(--foreground), 0.5)",
+            }}
+            aria-label={`Ir para o vídeo ${video.title}`}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

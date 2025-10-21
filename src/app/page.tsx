@@ -1,5 +1,4 @@
 import { Header } from "@/components/layout/header";
-import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
 import { Services } from "@/components/sections/services";
 import { Portfolio } from "@/components/sections/portfolio";
@@ -11,10 +10,9 @@ export default function Home() {
     <div className="flex flex-col min-h-[100dvh]">
       <Header />
       <main className="flex-1">
-        <Hero />
+        <Portfolio />
         <About />
         <Services />
-        <Portfolio />
         <Contact />
       </main>
       <Footer />
