@@ -1,4 +1,4 @@
-import { type LucideIcon, Video, Navigation, Scissors, Monitor } from "lucide-react";
+import { type LucideIcon, Video, Navigation, Radio, Camera } from "lucide-react";
 
 export type Service = {
   icon: LucideIcon;
@@ -8,24 +8,24 @@ export type Service = {
 
 export const services: Service[] = [
   {
+    icon: Camera,
+    title: "Diretor de Fotografia",
+    description: "Criação da identidade visual e supervisão da equipe de câmera.",
+  },
+  {
     icon: Video,
-    title: "Produção Audiovisual",
-    description: "Planejamento, captação e direção de fotografia.",
+    title: "Operador de Câmera",
+    description: "Foquista e 1º Assistente de Câmera.",
   },
   {
     icon: Navigation,
-    title: "Imagens Aéreas FPV e Estabilizadas",
+    title: "Imagens Aéreas",
     description: "Drones FPV e DJI 4K para imagens aéreas dinâmicas.",
   },
   {
-    icon: Scissors,
-    title: "Pós-Produção",
-    description: "Edição, colorização e finalização de projetos.",
-  },
-  {
-    icon: Monitor,
-    title: "Direção Técnica",
-    description: "Supervisão de set e operação de câmera especializada.",
+    icon: Radio,
+    title: "Transmissão ao Vivo",
+    description: "Soluções completas para eventos e transmissões online.",
   },
 ];
 

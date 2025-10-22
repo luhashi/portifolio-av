@@ -18,7 +18,7 @@ export function Services() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <Card key={service.title} className="flex flex-col items-center text-center p-6 bg-background/50 border border-transparent hover:border-primary/50 hover:bg-background transition-all duration-300 transform hover:-translate-y-2">
               <CardHeader className="p-0 mb-4">
                 <div className="bg-primary/10 p-4 rounded-full">
