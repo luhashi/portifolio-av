@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { Film } from "lucide-react";
+import { Film, Instagram, Linkedin, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { href: "#about", label: "Sobre" },
@@ -53,18 +54,37 @@ export function Header() {
           <Film className="h-6 w-6 text-primary" />
           <span className="text-lg font-bold">Luhashi Films</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-foreground/80 transition-colors hover:text-foreground"
-              prefetch={false}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex items-center gap-4">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-foreground/80 transition-colors hover:text-foreground"
+                prefetch={false}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="hidden md:flex items-center gap-2">
+             <Button variant="ghost" size="icon" asChild>
+                <Link href="https://www.instagram.com/luhashi" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <Instagram className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <Link href="https://www.linkedin.com/in/lucas-hashimoto-28b07b145/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Linkedin className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <Link href="https://port.luhashi.com" target="_blank" rel="noopener noreferrer" aria-label="Portfolio IA & DevOps">
+                  <Briefcase className="h-5 w-5" />
+                </Link>
+              </Button>
+          </div>
+        </div>
       </div>
     </motion.header>
   );
