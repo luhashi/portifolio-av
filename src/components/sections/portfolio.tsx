@@ -3,15 +3,23 @@ import { useState } from "react";
 import { portfolioVideos } from "@/lib/data";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { Volume2, VolumeX } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Portfolio() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const activeVideo = portfolioVideos[activeIndex];
 
   const videoVariants = {
     initial: { opacity: 0, scale: 1.05 },
     animate: { opacity: 1, scale: 1 },
     exit: { opacity: 0, scale: 1.05 },
+  };
+
+  const handleThumbnailClick = (index: number) => {
+    setActiveIndex(index);
+    setIsMuted(true); // Mute video when changing
   };
 
   return (
@@ -23,20 +31,31 @@ export function Portfolio() {
             className="absolute inset-0 z-0"
             variants={videoVariants}
             initial="initial"
-            animate="animate"
+animate="animate"
             exit="exit"
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             <iframe
-              src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=${activeVideo.youtubeId}`}
+              src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&mute=${isMuted ? 1 : 0}&controls=0&showinfo=0&loop=1&playlist=${activeVideo.youtubeId}`}
               title={activeVideo.title}
               frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
               className="w-full h-full object-cover"
             ></iframe>
           </motion.div>
         </AnimatePresence>
+        <div className="absolute top-4 right-4 z-20">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMuted(!isMuted)}
+              className="text-white bg-black/30 hover:bg-black/50 hover:text-white"
+            >
+              {isMuted ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
+              <span className="sr-only">{isMuted ? "Unmute" : "Mute"}</span>
+            </Button>
+          </div>
       </div>
 
       <div className="bg-background">
@@ -65,7 +84,7 @@ export function Portfolio() {
               {portfolioVideos.map((video, index) => (
                 <motion.button
                   key={video.id}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => handleThumbnailClick(index)}
                   className={`relative shrink-0 w-24 h-14 md:w-32 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
                     index === activeIndex ? "border-primary scale-105" : "border-transparent opacity-60 hover:opacity-100"
                   }`}
